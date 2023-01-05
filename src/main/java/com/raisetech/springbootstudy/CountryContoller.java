@@ -11,4 +11,4 @@ public class CountryContoller {
   public String countries(@PathVariable String country) {
     return "Hello " + country.substring(0, 1).toUpperCase() + country.substring(1) + "!";
   }
-  }
+}
