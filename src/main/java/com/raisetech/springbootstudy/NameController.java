@@ -31,13 +31,14 @@ public class NameController {
   //  UriComponentsBuilder.fronUriString: URIを生成する
   //  ResponseEntity.created(url).body(name): 201レスポンスを返す
   @PostMapping("/names")
-  public ResponseEntity<String> create(@RequestBody CreateForm form) {
+  public ResponseEntity<Map<String,String>> create(@RequestBody CreateForm form) {
     String name = form.getName();
+    Map<String,String> message = Map.of("name", "'" + name + "'" + " successfully created");
     URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
       .path("/names/1")
       .build()
       .toUri();
-    return ResponseEntity.created(url).body("'" + name + "'" + " successfully created"); //なぜこれはjsonで返せないのか？？
+    return ResponseEntity.created(url).body(message); //Stringで定義していたのでJSONで返せなかった
   }
 
 //  PATCH
