@@ -5,3 +5,10 @@
 - Project: Gradle - Groovy
 - Java: 17
 - Spring Boot: 2.7.7
+
+## ローカル環境DB
+
+```shell
+$ cd docker-my-sql
+$ docker-compose up -d
+```
