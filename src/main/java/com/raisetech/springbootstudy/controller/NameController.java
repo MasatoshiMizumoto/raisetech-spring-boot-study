@@ -1,5 +1,8 @@
-package com.raisetech.springbootstudy;
+package com.raisetech.springbootstudy.controller;
 
+import com.raisetech.springbootstudy.CreateForm;
+import com.raisetech.springbootstudy.UpdateForm;
+import com.raisetech.springbootstudy.service.NameService;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +18,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 public class NameController {
+
+  private final NameService nameService;
+
+  public NameController(NameService nameService) {
+    this.nameService = nameService;
+  }
+
   // GET
   @GetMapping("/names")
-  public List<String> getNames() {
-    return List.of("enami", "koyama", "noda", "akamatsu");
+  public List<NameResponse> getNames() { // List<Name>をList<NameResponse>に変換する
+    return nameService.findAll()
+        .stream()
+        .map(NameResponse::new)// NameResponseのコンストラクタを呼び出す
+        .toList(); // Stream APIを使って変換する
   }
 
   //  POST
@@ -28,7 +41,7 @@ public class NameController {
   //  ------------------------------------------------------------------------------
   //  ResponseEntity: HTTPレスポンスの情報を表すクラス
   //  @RequestBody: リクエストボディをJavaオブジェクトに変換する
-  //  UriComponentsBuilder.fronUriString: URIを生成する
+  //  UriComponentsBuilder.fromUriString: URIを生成する
   //  ResponseEntity.created(url).body(name): 201レスポンスを返す
   @PostMapping("/names")
   public ResponseEntity<Map<String,String>> create(@RequestBody CreateForm form) {
