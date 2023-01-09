@@ -12,3 +12,9 @@
 $ cd docker-my-sql
 $ docker-compose up -d
 ```
+
+## 設計
+
+|Method| Path   | Query String | Response(sample)                                                         |
+|:---|:-------|:-------------|:-------------------------------------------------------------------------|
+|GET| /names | (none)         | [{"name":"koyama"},{"name":"enami"},{"name":"noda"},{"name":"akamatsu"}] |

@@ -1,5 +1,6 @@
 package com.raisetech.springbootstudy.controller;
 
+
 import com.raisetech.springbootstudy.CreateForm;
 import com.raisetech.springbootstudy.UpdateForm;
 import com.raisetech.springbootstudy.service.NameService;
@@ -30,8 +31,8 @@ public class NameController {
   public List<NameResponse> getNames() { // List<Name>をList<NameResponse>に変換する
     return nameService.findAll()
         .stream()
-        .map(NameResponse::new)// NameResponseのコンストラクタを呼び出す
-        .toList(); // Stream APIを使って変換する
+        .map(NameResponse::new)
+        .toList();
   }
 
   //  POST
