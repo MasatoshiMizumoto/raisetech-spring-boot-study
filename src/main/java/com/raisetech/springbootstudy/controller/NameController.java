@@ -29,12 +29,12 @@ public class NameController {
 
   // GET
   @GetMapping("/names")
-  public String getNames() { // List<Name>をList<NameResponse>に変換する
+  public List<String> getNames() { // Listで返す形に変更
     return nameService.findAll()
         .stream()
         .map(NameResponse::new) // NameResponseのコンストラクタにNameを渡す
         .map(NameResponse::getName) // NameResponseのgetNameメソッドを呼び出す
-        .collect(Collectors.toList()).toString(); // List<String>に変換する
+        .collect(Collectors.toList()); // 処理結果を集めて戻り値の型であるList<String>に変換する
   }
 
   //  POST
