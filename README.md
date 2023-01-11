@@ -15,6 +15,6 @@ $ docker-compose up -d
 
 ## 設計
 
-|Method| Path   | Query String | Response(sample)                                                         |
-|:---|:-------|:-------------|:-------------------------------------------------------------------------|
-|GET| /names | (none)         | [{"name":"koyama"},{"name":"enami"},{"name":"noda"},{"name":"akamatsu"}] |
+|Method| Path   | Query String | Response(sample)                                                   |
+|:---|:-------|:-------------|:-----------------------------------|
+|GET| /names | (none)         | ["koyama","enami","noda","akamatsu"]                               |
