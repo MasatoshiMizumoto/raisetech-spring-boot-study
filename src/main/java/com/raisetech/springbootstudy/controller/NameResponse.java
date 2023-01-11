@@ -9,6 +9,6 @@ public class NameResponse {
     this.name = name.getName();
   }
   public String getName() {
-    return name;
+    return '"'+name+'"'; //JSONで返すためにダブルクォーテーションをつける
   }
 }

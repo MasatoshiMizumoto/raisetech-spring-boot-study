@@ -7,6 +7,7 @@ import com.raisetech.springbootstudy.service.NameService;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +29,12 @@ public class NameController {
 
   // GET
   @GetMapping("/names")
-  public List<NameResponse> getNames() { // List<Name>をList<NameResponse>に変換する
+  public String getNames() { // List<Name>をList<NameResponse>に変換する
     return nameService.findAll()
         .stream()
-        .map(NameResponse::new)
-        .toList();
+        .map(NameResponse::new) // NameResponseのコンストラクタにNameを渡す
+        .map(NameResponse::getName) // NameResponseのgetNameメソッドを呼び出す
+        .collect(Collectors.toList()).toString(); // List<String>に変換する
   }
 
   //  POST
