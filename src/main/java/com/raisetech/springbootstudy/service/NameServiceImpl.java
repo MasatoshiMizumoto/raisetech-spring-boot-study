@@ -20,6 +20,7 @@ public class NameServiceImpl implements NameService {
     return nameMapper.findAll();
   }
 
+//  宿題：独自の例外を作成して、例外が発生した場合には、その例外を投げるようにする
   @Override
   public Name findById(int id) throws Exception {
     return nameMapper.findById(id).orElseThrow(() -> new Exception("Not found"));

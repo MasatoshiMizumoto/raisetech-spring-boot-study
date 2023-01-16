@@ -3,6 +3,7 @@ package com.raisetech.springbootstudy.controller;
 
 import com.raisetech.springbootstudy.CreateForm;
 import com.raisetech.springbootstudy.UpdateForm;
+import com.raisetech.springbootstudy.entity.Name;
 import com.raisetech.springbootstudy.service.NameService;
 import java.net.URI;
 import java.util.List;
@@ -30,10 +31,9 @@ public class NameController {
   // GET
   @GetMapping("/names")
   public List<String> getNames() { // Listで返す形に変更
-    return nameService.findAll()
-        .stream()
-        .map(NameResponse::new) // NameResponseのコンストラクタにNameを渡す
-        .map(NameResponse::getName) // NameResponseのgetNameメソッドを呼び出す
+    return nameService.findAll()//Name型のListを返す
+        .stream()//Stream開始
+        .map(Name::getName)//Nameからnameを取り出す
         .collect(Collectors.toList()); // 処理結果を集めて戻り値の型であるList<String>に変換する
   }
 
