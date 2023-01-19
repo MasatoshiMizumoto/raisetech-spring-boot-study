@@ -1,8 +1,14 @@
-package com.raisetech.springbootstudy;
+package com.raisetech.springbootstudy.controller;
 
+
+import com.raisetech.springbootstudy.CreateForm;
+import com.raisetech.springbootstudy.UpdateForm;
+import com.raisetech.springbootstudy.entity.Name;
+import com.raisetech.springbootstudy.service.NameService;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +21,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 public class NameController {
+
+  private final NameService nameService;
+
+  public NameController(NameService nameService) {
+    this.nameService = nameService;
+  }
+
   // GET
   @GetMapping("/names")
-  public List<String> getNames() {
-    return List.of("enami", "koyama", "noda", "akamatsu");
+  public List<String> getNames() { // Listで返す形に変更
+    return nameService.findAll()//Name型のListを返す
+        .stream()//Stream開始
+        .map(Name::getName)//Nameからnameを取り出す
+        .collect(Collectors.toList()); // 処理結果を集めて戻り値の型であるList<String>に変換する
   }
 
   //  POST
@@ -28,7 +44,7 @@ public class NameController {
   //  ------------------------------------------------------------------------------
   //  ResponseEntity: HTTPレスポンスの情報を表すクラス
   //  @RequestBody: リクエストボディをJavaオブジェクトに変換する
-  //  UriComponentsBuilder.fronUriString: URIを生成する
+  //  UriComponentsBuilder.fromUriString: URIを生成する
   //  ResponseEntity.created(url).body(name): 201レスポンスを返す
   @PostMapping("/names")
   public ResponseEntity<Map<String,String>> create(@RequestBody CreateForm form) {
